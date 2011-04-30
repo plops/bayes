@@ -8,16 +8,19 @@ addiere zwei kreise und ziehe ueberlapp ab
 
 unconditional probability P(cavity=true)=0.1
 
-probability distribution \P(weather)=<.72,.1,.08,.1>
+probability distribution \P(weather)=<sunny,rainy,cloudy,snow>=<.72,.1,.08,.1>
 
 
 joint probability distribution \P(weather,cavity) = 4x2 matrix
 
-| weather=     | sunny | rain | cloudy | snow |
-|--------------+-------+------+--------+------|
-| cavity=true  |   .14 |  .02 |   .016 |  .02 |
-| cavity=false |   .58 |  .08 |   .064 |  .08 |
-
+| weather=     | sunny | rain | cloudy | snow |   |     |
+|--------------+-------+------+--------+------+---+-----|
+| cavity=true  |  .144 |  .02 |   .016 |  .02 |   | 0.2 |
+| cavity=false |  .576 |  .08 |   .064 |  .08 |   | 0.8 |
+|--------------+-------+------+--------+------+---+-----|
+| P(weather)   |  0.72 |  0.1 |   0.08 |  0.1 |   |     |
+|              |       |      |        |      |   |     |
+#+TBLFM: $2=vsum(@2$2..@3$2)::$4=@2$4+@3$4::$5=@2$5+@3$5::$7=vsum(@3$2..@3$5)::@5$3=@2$3+@3$3
 
 conditional or posterior probabilities
 P(cavity|toothache)=.8
@@ -105,5 +108,13 @@ P(h_i|d)=alpha P(d|h_i) P(h_i)
 
 (let ((h (1 .75 .5 .25 .0))))
 
-
+vorhersage ueber eine unbekannte groesse X:
 P(X|d) = sum_i P(X|d,h_i) P(h_i|d)  = sum_i P(X|h_i)P(h_i|d)
+
+hypothesis prior P(h_i)
+likelihood of the data under each hypothesis P(\d|h_i)
+if data is independent and identically distributed (i.d.d.)  we have P(\d|h_i)=prod_j P(d_j|h_i)
+wenn nur zitrone kommt und pack h_3 zitrone zu 50% enthaelt, dann gilt P(\d|h_3)=.5^10 
+
+\P(<h1 h2 h3 h4 h5>)=<.1 .2 .4 .2 .1>
+
