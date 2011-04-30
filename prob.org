@@ -1,0 +1,109 @@
+P induziert eine Wsk verteilung fuer eine zufallsvariable X:
+P(X=x)=sum_{w:X(w)=x} P(w)
+
+proposition: event (set of sample points) where proposition is true
+bei logisch verknuepften events sind es auch die wsks
+P(a || b) = P(a) + P(b) - P(a & b) 
+addiere zwei kreise und ziehe ueberlapp ab
+
+unconditional probability P(cavity=true)=0.1
+
+probability distribution \P(weather)=<.72,.1,.08,.1>
+
+
+joint probability distribution \P(weather,cavity) = 4x2 matrix
+
+| weather=     | sunny | rain | cloudy | snow |
+|--------------+-------+------+--------+------|
+| cavity=true  |   .14 |  .02 |   .016 |  .02 |
+| cavity=false |   .58 |  .08 |   .064 |  .08 |
+
+
+conditional or posterior probabilities
+P(cavity|toothache)=.8
+
+conditional wsk: P(a|b) = P(a & b) / P(b)
+
+produkt regel
+P(a & b) = P(a|b)P(b) = P(b|a)P(a)
+
+fuer ganze verteilungen 4x2 gleichungen:
+\P(weather,cavity) = \P(weather|cavity) \P(cavity)
+
+kettenregel
+\P(A,B,C) = \P(A,B)\P(C|A,B)=\P(A)\P(B|A)\P(C|A,B)=\prod_i=1^3 \P(A|A,B)
+
+addiere alle events wo eine proposition phi wahr ist um P(phi) zu erhalten
+fuer conditional probability teile durch die summe hinter dem |
+
+normierung: \P(cavity|toothache) = // falsch[.108/(.108+.016) .012/(.012+.064)]
+= alpha \P(cavity,toothache)
+= alpha (<.108 .016> + <.012 .064>)
+= alpha <.12 .08>                      -> alpha = 1/(.12 + .08) = 1/.2=5
+= <.6 .4>
+
+um ergebnis fuer query variable zu bekommen
+halte evidenzvariable fest (toothache)
+und summiere ueber hidden variables (catch, !catch)
+
+X seien alle variablen
+posterior joint distribution der query variablen Y
+mit gegebenen werten e der evidenzvariablen E
+hidden variables : H=X-Y-E
+
+summierung ueber joint entries durch summe ueber hidden variables:
+\P(\Y|\E=\e)=alpha \P(\Y,\E=\e)=alpha sum_\h \P(\Y,\E=\e,\H=\h)
+
+
+A und B sind unabhaengig, falls
+P(A|B)=P(A) oder
+P(B|A)=P(B) oder
+P(A,B)=P(A)P(B)
+
+conditional independence
+\P(catch|toothache,cavity)=\P(catch|cavity) oder
+\P(toothache|catch,cavity)=\P(toothache|cavity) oder
+\P(toothache,catch|cavity)=\P(toothache|cavity)P(catch|cavity)
+
+die volle verteilung mit kettenregel ausgeschrieben:
+\P(ache,catch,cave)=
+\P(ache|catch,cave)\P(catch,cave)=
+\P(ache|catch,cave)\P(catch|cave)\P(cave)=
+\P(ache|cave)\P(catch|cave)\P(cave)
+
+oft reduziert die einfuehrung von conditional independence die groesse
+der joint distribution darstellung von exponentiell in n zu linear in n
+
+
+bayes regel:
+P(a & b) = P(a|b)P(b) = P(b|a) P(a)
+P(a|b)=P(b|a)P(a)/P(b)
+
+als verteilungen:
+\P(Y|X)=\P(X|Y)P(Y)/P(X) = alpha P(X|Y)P(Y)
+
+nuetzlich:
+P(cause|effect)=P(effect|cause)P(cause)/P(effect)
+
+z.b. effect=steifer nacken=s   cause=meningitis=m
+P(m|s)=P(s|m)P(m)/P(s)=.8 .0001/.1=.0008 sehr klein
+
+\P(cave|ache & catch) =
+alpha \P(ache & catch|cave)\P(cave)=
+alpha \P(ache|cave)\P(catch|cave)\P(cave)
+
+\P(cause,effect1, ... effectn)=\P(cause) prod_i \P(effect_i|cause)
+anzahl parameter linear in n
+
+queries can be answered by summing gover atomic events 
+
+data=evidence    D1 .. D_N each a random variable either cherry or lime
+hypothese H      type of bag (h1 .. h5)
+wahrscheinlichkeit fuer jede hypothese wenn man daten d gesehen hat:
+P(h_i|d)=alpha P(d|h_i) P(h_i)
+
+
+(let ((h (1 .75 .5 .25 .0))))
+
+
+P(X|d) = sum_i P(X|d,h_i) P(h_i|d)  = sum_i P(X|h_i)P(h_i|d)
