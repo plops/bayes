@@ -118,3 +118,6 @@ wenn nur zitrone kommt und pack h_3 zitrone zu 50% enthaelt, dann gilt P(\d|h_3)
 
 \P(<h1 h2 h3 h4 h5>)=<.1 .2 .4 .2 .1>
 
+see prob.lisp for code
+
+maximum likelihood assumes uniform prior (each pack (hypothesis) has same probability)
